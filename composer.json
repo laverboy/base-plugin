@@ -1,0 +1,21 @@
+{
+    "name": "reasondigital/base-plugin",
+    "authors": [
+        {
+            "name": "Matthew Laver",
+            "email": "matthew.laver@reasondigital.com"
+        }
+    ],
+    "require": {
+        "pimple/pimple": "~3.0",
+        "monolog/monolog": "^1.17"
+    },
+    "autoload": {
+        "psr-4": {
+            "BasePlugin\\": "src"
+        }
+    },
+    "config": {
+        "autoloader-suffix": "baseplugin"
+    }
+}
