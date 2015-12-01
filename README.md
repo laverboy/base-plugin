@@ -17,21 +17,9 @@ If the registered class has a method called init, that method will be called aft
     }
     
 # Logging
-Then plugin includes the monolog logging package. To use pass the service (`$c['log']`) into your class:
+The plugin includes the monolog logging package. To use call the static class with the matching log severity level method:
 
-    $plugin['example'] = function ( $c ) {
-    	return new \BasePlugin\Example( $c['path'], $c['log'] );
-    };
-    
-Then in your class you can use it as usual:
-
-    function __construct( $path, Logger $log ) {
-        $this->path = $path;
-        $this->log  = $log;
-    }
-    
-    function doSomething() {
-        $this->log->Info('Something has been done', ['extra_information' => 'the something that was done']);
-    }
+    BasePlugin\Log::info("New user added.", ['extra_information' => 'the something that was done']);
+    BasePlugin\Log::emergency("It's all on fire, get out!", ['fire_started' => '10:00:00', 'death_toll' => 'unknown']);
 
 See [Monolog](https://github.com/Seldaek/monolog) for more information.

@@ -6,7 +6,6 @@
  * License: GPL-2.0+
  */
 
-use BasePlugin\DefaultServicesProvider;
 use BasePlugin\Plugin;
 
 /** @var wpdb $wpdb */
@@ -15,7 +14,6 @@ global $wpdb;
 require "vendor/autoload.php";
 
 $plugin = new Plugin();
-$plugin->register( new DefaultServicesProvider() );
 
 $plugin['path']    = realpath( plugin_dir_path( __FILE__ ) ) . DIRECTORY_SEPARATOR;
 $plugin['url']     = plugin_dir_url( __FILE__ );

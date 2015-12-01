@@ -10,7 +10,7 @@ class Log {
 	/**
 	 * Method to return the Monolog instance
 	 *
-	 * @return Monolog\Logger
+	 * @return \Monolog\Logger
 	 */
 	static public function getLogger()
 	{
@@ -34,8 +34,10 @@ class Log {
 			mkdir($dir, 0777, true);
 		}
 
-		self::$instance = new Logger('Plugin');
-		self::$instance->pushHandler(new RotatingFileHandler($dir . DIRECTORY_SEPARATOR . 'main.log', 5));
+		$logger = new Logger('RdLotteryManager');
+		$logger->pushHandler(new RotatingFileHandler($dir . DIRECTORY_SEPARATOR . 'main.log', 5));
+		//$logger->pushHandler(new LogglyHandler('eeb5ba83-f0d6-4273-bb1d-523231583855/tag/monolog'));
+		self::$instance = $logger;
 	}
 
 	public static function debug($message, array $context = []){
