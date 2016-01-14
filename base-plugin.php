@@ -29,6 +29,10 @@ $plugin['db_table_name']  = $wpdb->prefix . 'baseplugin_table_name';
 $plugin['activator'] = function ( $c ) {
 	return new BasePlugin\Activator( __FILE__, $c['db_version'], $c['db_option_name'], $c['db_table_name'] );
 };
+// Logger
+$plugin['log'] = function ($c) {
+	return \BasePlugin\Log::getLogger();
+};
 
 // Example, please delete, along with associated file
 // the previously defined services and variables are available through
