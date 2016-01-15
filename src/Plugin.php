@@ -9,11 +9,8 @@ class Plugin extends Container {
 		foreach( $this->keys() as $key ){ // Loop on contents
 			$content = $this[$key];
 
-			if( is_object( $content ) ){
-				$reflection = new \ReflectionClass( $content );
-				if( $reflection->hasMethod( 'init' ) ){
-					$content->init(); // Call run method on object
-				}
+			if ( is_object( $content ) && method_exists( $content, 'init' ) ) {
+				$content->init( $this ); // Call run method on object
 			}
 		}
 	}
