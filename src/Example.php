@@ -1,7 +1,5 @@
 <?php namespace BasePlugin;
 
-use Monolog\Logger;
-
 class Example {
 
 	/** @var  string The base path for this plugin */
@@ -10,9 +8,8 @@ class Example {
 	/** @var  Logger */
 	protected $log;
 
-	function __construct( $path, Logger $log ) {
+	function __construct( $path ) {
 		$this->path = $path;
-		$this->log  = $log;
 		$this->pluginName = "BasePlugin";
 	}
 
@@ -34,7 +31,7 @@ class Example {
 
 		// pass logger to your class whenever you want to log something
 		// ensure log directory has correct permissions
-		$this->log->Info('Welcome message shown', ['action' => 'admin_notices']);
+		BasePlugin\Log::Info('Welcome message shown', ['action' => 'admin_notices']);
 	}
 
 }
