@@ -71,7 +71,7 @@ class Updater {
 	}
 
 	public function init() {
-	
+
 		// Un-comment to test - makes WP check every time for new plugins
 		// delete_option( '_site_transient_update_plugins' );
 
@@ -92,18 +92,24 @@ class Updater {
 
 		$args = [
 			'headers' => [
-				'Authorization' => 'Basic ' . base64_encode( "charitypress:{$this->api_key}" )
+				'Authorization' => 'Basic ' . base64_encode( "rddev:{$this->api_key}" )
 			]
 		];
 
-		$json = wp_remote_retrieve_body( wp_remote_get( $url, $args ) );
+		$response = wp_remote_get( $url, $args );
+		$json     = wp_remote_retrieve_body( $response );
 		if ( ! empty( $json ) ) {
 			$results           = json_decode( $json, true );
-			$this->tag         = max( array_keys( $results ) );
+			$this->tag         = $this->getHighestTag( array_keys( $results ) );
 			$this->published   = $results[ $this->tag ]['timestamp'];
 			$this->downloadUrl = "https://bitbucket.org/{$this->repository_path}/get/{$this->tag}.zip";
 		}
 
+	}
+
+	protected function getHighestTag( array $tags ) {
+		usort($tags, 'version_compare');
+		return end($tags);
 	}
 
 	/**
@@ -230,17 +236,25 @@ class Updater {
 	 */
 	public function alterDirectoryNameDuringUpgrade( $source, $remote_source, $upgrader, $hook_extra ) {
 
-		global $wp_filesystem;
-
-		if ( ! ($upgrader instanceof \Plugin_Upgrader) ) {
+		if ( is_wp_error( $source ) ) {
 			return $source;
 		}
+
+		if ( ! ( $upgrader instanceof \Plugin_Upgrader ) ) {
+			return $source;
+		}
+
+		if ( strpos( $source, basename( $this->repository_path) ) === false ) {
+			return $source;
+		}
+
+		global $wp_filesystem;
 
 		$new_source = trailingslashit( $remote_source ) . dirname( plugin_basename( $this->pluginFile ) );
 
 		$wp_filesystem->move( $source, $new_source );
 
-		return trailingslashit($new_source);
+		return trailingslashit( $new_source );
 	}
 
 }
