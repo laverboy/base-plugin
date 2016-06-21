@@ -8,7 +8,9 @@
 
 use BasePlugin\Plugin;
 
-/** @var wpdb $wpdb */
+/**
+ * @var wpdb $wpdb
+ */
 global $wpdb;
 
 require "vendor/autoload.php";
