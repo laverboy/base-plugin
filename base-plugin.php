@@ -38,7 +38,7 @@ $plugin['activator'] = function ( $c ) {
 // the previously defined services and variables are available through
 // the function parameter
 $plugin['example'] = function ( $c ) {
-	return new \BasePlugin\Example( $c['path'], $c['log'] );
+	return new \BasePlugin\Example( $c['path'] );
 };
 
 $plugin->run();
