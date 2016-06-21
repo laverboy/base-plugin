@@ -16,11 +16,13 @@ global $wpdb;
 require "vendor/autoload.php";
 
 $plugin = new Plugin();
+$plugin->register(new \CharityPressDonations\DefaultServices(__FILE__));
 
-$plugin['path']    = realpath( plugin_dir_path( __FILE__ ) ) . DIRECTORY_SEPARATOR;
-$plugin['url']     = plugin_dir_url( __FILE__ );
-$plugin['version'] = '0.1.0'; // don't forget to update the comment block as well
-$plugin['nonce']   = 'NonceKey';
+$plugin['path']               = realpath( plugin_dir_path( __FILE__ ) ) . DIRECTORY_SEPARATOR;
+$plugin['url']                = plugin_dir_url( __FILE__ );
+$plugin['version']            = '0.1.0'; // don't forget to update the comment block as well
+$plugin['plugin_option_name'] = 'BasePlugin_details'; // The wp db option name that stores the plugins version number
+$plugin['nonce']              = 'NonceKey';
 
 // DB details
 $plugin['db_version']     = 1;

@@ -23,3 +23,17 @@ The plugin includes the monolog logging package. To use call the static class wi
     BasePlugin\Log::emergency("It's all on fire, get out!", ['fire_started' => '10:00:00', 'death_toll' => 'unknown']);
 
 See [Monolog](https://github.com/Seldaek/monolog) for more information.
+
+# Updater action
+As Wordpress doesn't have a default way to handle when a plugin is updated this base plugin includes its own work around.
+
+One of the default services listens for changes in the plugin version number stored against the `$plugin['plugin_option_name']` and triggers an action with the title of `$plugin['plugin_option_name']` followed by `_updated`.
+
+eg. when 'BasePlugin_details' is updated the action 'BasePlugin_details_updated' will be called.
+
+Furthermore the action is passed the new version number.
+
+# Testing
+The initial setup for testing your plugin is included in the base plugin.
+
+Simply add your tests in the Tests directory and run `phpunit` in the root directory.
