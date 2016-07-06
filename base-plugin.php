@@ -16,7 +16,7 @@ global $wpdb;
 require "vendor/autoload.php";
 
 $plugin = new Plugin();
-$plugin->register(new \CharityPressDonations\DefaultServices(__FILE__));
+$plugin->register(new \BasePlugin\DefaultServices(__FILE__));
 
 $plugin['path']               = realpath( plugin_dir_path( __FILE__ ) ) . DIRECTORY_SEPARATOR;
 $plugin['url']                = plugin_dir_url( __FILE__ );
