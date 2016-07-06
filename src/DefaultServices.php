@@ -1,4 +1,4 @@
-<?php namespace CharityPressDonations;
+<?php namespace BasePlugin;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
